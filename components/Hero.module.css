@@ -1,0 +1,173 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 3rem 4rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 0.5px solid var(--accent);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 1.5rem;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.tagline {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  font-weight: 300;
+  margin-bottom: 1.25rem;
+  max-width: 420px;
+  line-height: 1.65;
+}
+
+.summary {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.8;
+  max-width: 400px;
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  transition: background 0.2s;
+}
+
+.btnPrimary:hover {
+  background: var(--accent);
+}
+
+.btnOutline {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  border: 0.5px solid var(--ink);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btnOutline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.photoWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.photoFrame {
+  width: 280px;
+  height: 340px;
+  border-radius: 2px;
+  background: var(--paper-2);
+  border: 0.5px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 1rem;
+}
+
+.photoHint {
+  font-size: 11px;
+  color: var(--ink-muted);
+  opacity: 0.7;
+}
+
+.decoLine {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 80px;
+  height: 80px;
+  border: 0.5px solid var(--rule);
+  z-index: -1;
+}
+
+.photoLabel {
+  position: absolute;
+  bottom: -28px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 700px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+  .photoWrap {
+    display: none;
+  }
+  .hero {
+    padding: 7rem 1.5rem 3rem;
+  }
+}
