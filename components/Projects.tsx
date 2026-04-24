@@ -5,8 +5,8 @@ type Project = {
   title: string
   description: string
   tags: string[]
-  liveUrl: string
-  githubUrl: string
+  githubUrl?: string
+  googleColabUrl?: string
   icon: React.ReactNode
 }
 
@@ -40,15 +40,14 @@ const GridIcon = () => (
   </svg>
 )
 
-const projects: Project[] = [
+const analyticProjects: Project[] = [
   {
     type: 'Marketing Strategy Analysis',
     title: 'Cyclistic',
     description:
       'Combined and analysed 12 months of bike-share data to identify behavioral differences between casual riders and annual members. Performed data cleaning, transformation, and feature engineering to surface weekday, hourly, and ride-duration trends, then translated the findings into targeted marketing insights.',
     tags: ['Excel', 'Power Query'],
-    liveUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/hydromelonn229/Cyclistic_CaseStudy',
     icon: <BarIcon />,
   },
   {
@@ -57,7 +56,6 @@ const projects: Project[] = [
     description:
       'Processed and analysed a multi-sheet dataset of 10,000+ records, identifying a 20% churn rate through EDA. Highlighted 700+ high-value customers for retention campaigns with a projected 36% conversion potential.',
     tags: ['Python', 'Pandas', 'Seaborn', 'Matplotlib'],
-    liveUrl: '#',
     githubUrl: '#',
     icon: <PieIcon />,
   },
@@ -67,19 +65,8 @@ const projects: Project[] = [
     description:
       'Developed a 4-page Power BI dashboard analysing workforce composition, salary equity, performance distribution, and attrition drivers across a 2M-record HR dataset. Translated raw HR data into actionable workforce insights by department and job level.',
     tags: ['Python', 'Power BI'],
-    liveUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/hydromelonn229/HR_data_analysis',
     icon: <LineIcon />,
-  },
-  {
-    type: 'Automation System',
-    title: 'AUREX Exam Paper Automation System',
-    description:
-      'Built a privacy-preserving system to automate exam paper generation for large university courses. Reduced exam preparation time by 95% and created an end-to-end pipeline with Excel input, NLP-based duplicate detection, and automated Word document generation.',
-    tags: ['Python', 'NLP', 'Scikit-learn', 'Flask'],
-    liveUrl: '#',
-    githubUrl: '#',
-    icon: <GridIcon />,
   },
   {
     type: 'Predictive Modelling',
@@ -87,9 +74,38 @@ const projects: Project[] = [
     description:
       'Built machine learning models to predict movie revenue and ratings using 30,000+ records. Designed data cleaning and feature engineering pipelines, then developed Power BI dashboards to visualise trends and identify key success factors.',
     tags: ['Python', 'Pandas', 'Power BI'],
-    liveUrl: '#',
-    githubUrl: '#',
+    googleColabUrl: 'https://colab.research.google.com/drive/1l2mVwSs285kB0A5ZCgbldIYzirVIePtC?usp=sharing',
     icon: <BarIcon />, 
+  },
+]
+
+const developmentProjects: Project[] = [
+  {
+    type: 'Automation System',
+    title: 'AUREX Exam Paper Automation System',
+    description:
+      'Built a privacy-preserving system to automate exam paper generation for large university courses. Reduced exam preparation time by 95% and created an end-to-end pipeline with Excel input, NLP-based duplicate detection, and automated Word document generation.',
+    tags: ['Python', 'NLP', 'Scikit-learn', 'Flask'],
+    githubUrl: 'https://github.com/juliaizbroke/SeniorProject1',
+    icon: <GridIcon />,
+  },
+  {
+    type: 'Ticket Management Platform',
+    title: 'DTG FieldLink',
+    description:
+      'A development project focused on ticket lifecycle tracking, assignment workflows, and streamlined team coordination for field operations.',
+    tags: ['Web App', 'Ticketing', 'Platform'],
+    githubUrl: 'https://github.com/ZweLaPyae/DTG_FieldLink',
+    icon: <LineIcon />,
+  },
+  {
+    type: 'Puzzle Game',
+    title: 'Keybound Depths',
+    description:
+      'A game development project centered on puzzle-driven progression, level mechanics, and interactive gameplay design.',
+    tags: ['Game Dev', 'Puzzle', 'Gameplay'],
+    githubUrl: 'https://github.com/hydromelonn229/GameDevPrj',
+    icon: <PieIcon />,
   },
 ]
 
@@ -98,10 +114,10 @@ export default function Projects() {
     <section id="projects" className={styles.section}>
       <div className={styles.header}>
         <p className={styles.label}>Work</p>
-        <h2 className={styles.title}>Projects</h2>
+        <h2 className={styles.title}>Analytic Projects</h2>
       </div>
       <div className={styles.grid}>
-        {projects.map((project, i) => (
+        {analyticProjects.map((project, i) => (
           <div key={i} className={styles.card}>
             <div className={styles.thumb}>{project.icon}</div>
             <div className={styles.body}>
@@ -115,12 +131,51 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className={styles.links}>
-                  <a href={project.githubUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
-                    GitHub →
-                  </a>
-                  <a href={project.liveUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
-                    Live →
-                  </a>
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
+                      GitHub →
+                    </a>
+                  )}
+                  {project.googleColabUrl && (
+                    <a href={project.googleColabUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
+                      Colab →
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.header}>
+        <h2 className={styles.title}>Development Projects</h2>
+      </div>
+      <div className={styles.grid}>
+        {developmentProjects.map((project, i) => (
+          <div key={project.title + i} className={styles.card}>
+            <div className={styles.thumb}>{project.icon}</div>
+            <div className={styles.body}>
+              <p className={styles.type}>{project.type}</p>
+              <h3 className={styles.cardTitle}>{project.title}</h3>
+              <p className={styles.desc}>{project.description}</p>
+              <div className={styles.footer}>
+                <div className={styles.tags}>
+                  {project.tags.map((tag) => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  ))}
+                </div>
+                <div className={styles.links}>
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
+                      GitHub →
+                    </a>
+                  )}
+                  {project.googleColabUrl && (
+                    <a href={project.googleColabUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
+                      Colab →
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
