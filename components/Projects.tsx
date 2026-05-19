@@ -40,6 +40,17 @@ const GridIcon = () => (
   </svg>
 )
 
+const ScanIcon = () => (
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+    <rect x="4" y="6" width="20" height="26" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+    <line x1="8" y1="13" x2="20" y2="13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    <line x1="8" y1="18" x2="20" y2="18" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    <line x1="8" y1="23" x2="15" y2="23" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    <rect x="22" y="20" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+    <path d="M25 25 L27 27 L31 22" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
 const analyticProjects: Project[] = [
   {
     type: 'Marketing Strategy Analysis',
@@ -55,7 +66,7 @@ const analyticProjects: Project[] = [
     title: 'Bank Customer Churn Analysis',
     description:
       'Processed and analysed a multi-sheet dataset of 10,000+ records, identifying a 20% churn rate through EDA. Highlighted 700+ high-value customers for retention campaigns with a projected 36% conversion potential.',
-    tags: ['Python', 'Pandas', 'Seaborn', 'Matplotlib'],
+    tags: ['Python', 'Pandas', 'Seaborn', 'Matplotlib', 'Streamlit'],
     githubUrl: '#',
     icon: <PieIcon />,
   },
@@ -75,7 +86,16 @@ const analyticProjects: Project[] = [
       'Built machine learning models to predict movie revenue and ratings using 30,000+ records. Designed data cleaning and feature engineering pipelines, then developed Power BI dashboards to visualise trends and identify key success factors.',
     tags: ['Python', 'Pandas', 'Power BI'],
     googleColabUrl: 'https://colab.research.google.com/drive/1l2mVwSs285kB0A5ZCgbldIYzirVIePtC?usp=sharing',
-    icon: <BarIcon />, 
+    icon: <BarIcon />,
+  },
+  {
+    type: 'Computer Vision · AI',
+    title: 'Receipt Field Detection',
+    description:
+      'Fine-tuned a YOLOv8s model to automatically detect and localise 7 key fields in receipt and invoice images — including seller name, VAT number, product descriptions, quantities, prices, and total due. Built a full pipeline covering LabelMe annotation, label conversion, data augmentation (3× dataset expansion), and model training over 100 epochs.',
+    tags: ['Python', 'YOLOv8', 'OpenCV', 'Albumentations'],
+    githubUrl: 'https://github.com/hydromelonn229/Receipt-Field-Detection',
+    icon: <ScanIcon />,
   },
 ]
 
@@ -114,7 +134,7 @@ export default function Projects() {
     <section id="projects" className={styles.section}>
       <div className={styles.header}>
         <p className={styles.label}>Work</p>
-        <h2 className={styles.title}>Analytic Projects</h2>
+        <h2 className={styles.title}>Data Analytics and Science Projects</h2>
       </div>
       <div className={styles.grid}>
         {analyticProjects.map((project, i) => (

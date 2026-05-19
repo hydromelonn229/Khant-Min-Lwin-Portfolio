@@ -30,19 +30,25 @@
   gap: 1.5rem;
 }
 
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
 .card {
   display: grid;
-  grid-template-columns: 90px 1fr;
+  grid-template-columns: 90px 1fr auto;
   gap: 1.5rem;
   padding: 1.5rem;
   background: var(--paper);
   border: 0.5px solid var(--rule);
   border-radius: 4px;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
-.card:hover {
+.cardLink:hover .card {
   border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .year {
@@ -72,12 +78,28 @@
   line-height: 1.65;
 }
 
+.arrow {
+  font-size: 18px;
+  color: var(--ink-muted);
+  align-self: start;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.cardLink:hover .arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
 @media (max-width: 600px) {
   .section {
     padding: 4rem 1.5rem;
   }
   .card {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     gap: 0.5rem;
+  }
+
+  .year {
+    grid-column: 1 / 2;
   }
 }
