@@ -12,6 +12,11 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 0.5px solid var(--rule);
+  transition: box-shadow 0.3s ease;
+}
+
+.scrolled {
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
 }
 
 .logo {
@@ -21,6 +26,8 @@
   text-decoration: none;
   letter-spacing: 0.01em;
 }
+
+/* ── Desktop links ── */
 
 .links {
   display: flex;
@@ -37,10 +44,28 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   transition: color 0.2s;
+  position: relative;
 }
 
 .links a:hover {
   color: var(--accent);
+}
+
+/* Active section indicator */
+.links a.active,
+.drawerLinks a.active {
+  color: var(--accent);
+}
+
+.links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
 }
 
 .contactBtn {
@@ -77,4 +102,164 @@
   color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-light);
+}
+
+/* ── Mobile controls (hidden on desktop) ── */
+
+.mobileControls {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ── Hamburger ── */
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  border: 0.5px solid var(--rule);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.2s;
+}
+
+.hamburger:hover {
+  border-color: var(--accent);
+}
+
+.hamburger span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--ink-soft);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburgerOpen span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburgerOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerOpen span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── Overlay ── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 98;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Mobile drawer ── */
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 80vw;
+  z-index: 99;
+  background: var(--paper);
+  border-left: 0.5px solid var(--rule);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6rem 2rem 2rem;
+  overflow-y: auto;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.drawerLinks li {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.drawerOpen .drawerLinks li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.drawerLinks a {
+  display: block;
+  padding: 1rem 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--rule);
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.drawerLinks a:hover {
+  color: var(--accent);
+  padding-left: 0.5rem;
+}
+
+.drawerContact {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--paper) !important;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.2s;
+}
+
+.drawerContact:hover {
+  background: var(--accent);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 700px) {
+  .nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .mobileControls {
+    display: flex;
+  }
 }

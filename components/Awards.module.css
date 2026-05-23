@@ -31,15 +31,31 @@
 }
 
 .card {
+  display: flex;
+  gap: 1.25rem;
   padding: 1.5rem;
   background: var(--paper);
   border: 0.5px solid var(--rule);
-  border-radius: 4px;
-  transition: border-color 0.2s;
+  border-radius: 6px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
 
 .card:hover {
   border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .awardTitle {
@@ -64,5 +80,10 @@
 @media (max-width: 600px) {
   .section {
     padding: 4rem 1.5rem;
+  }
+
+  .card {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }

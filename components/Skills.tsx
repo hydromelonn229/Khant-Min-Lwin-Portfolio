@@ -1,84 +1,59 @@
+'use client'
+
+import AnimatedSection from './AnimatedSection'
 import styles from './Skills.module.css'
 
-type Skill = { name: string; level: number }
-type SkillGroup = { category: string; skills: Skill[] }
+type SkillGroup = { category: string; skills: string[] }
 
 const skillGroups: SkillGroup[] = [
   {
     category: 'Programming & Data',
-    skills: [
-      { name: 'Python', level: 90 },
-      { name: 'SQL (MySQL, PostgreSQL)', level: 88 },
-      { name: 'Pandas', level: 88 },
-      { name: 'NumPy', level: 82 },
-    ],
+    skills: ['Python', 'SQL (MySQL, PostgreSQL)', 'Pandas', 'NumPy', 'Nextjs', 'Nodejs', 'Reactjs', 'API Integration (REST APIs)'],
   },
   {
     category: 'Data Analysis',
-    skills: [
-      { name: 'EDA', level: 88 },
-      { name: 'Data Cleaning', level: 90 },
-      { name: 'Feature Engineering', level: 84 },
-      { name: 'Statistical Analysis', level: 80 },
-    ],
+    skills: ['EDA', 'Data Cleaning', 'Feature Engineering', 'Statistical Analysis', 'Data Storytelling', 'Hypothesis Testing', 'A/B Testing'],
   },
   {
     category: 'Machine Learning',
-    skills: [
-      { name: 'Scikit-learn', level: 80 },
-      { name: 'Predictive Modeling', level: 78 },
-      { name: 'NLP', level: 68 },
-      { name: 'BERT', level: 62 },
-    ],
+    skills: ['Scikit-learn', 'Predictive Modeling', 'Regression Analysis', 'Classification Models', 'Clustering', 'Model Evaluation'],
   },
   {
     category: 'Visualization',
-    skills: [
-      { name: 'Power BI', level: 86 },
-      { name: 'Tableau', level: 74 },
-      { name: 'Matplotlib', level: 76 },
-      { name: 'Seaborn', level: 76 },
-    ],
+    skills: ['Power BI', 'Tableau', 'Matplotlib', 'Seaborn', 'Chart.js', 'Excel', 'Plotly', 'Streamlit', 'Dashboard Development'],
   },
   {
     category: 'Tools & Technologies',
-    skills: [
-      { name: 'GitHub', level: 78 },
-      { name: 'Web Scraping (BeautifulSoup)', level: 70 },
-      { name: 'Excel (PivotTables, XLOOKUP, INDEX-MATCH)', level: 90 },
-      { name: 'Power Query / DAX', level: 84 },
-    ],
+    skills: ['GitHub', 'Claude Code', 'Excel (PivotTables, XLOOKUP)', 'Antigravity', 'Google Colab', 'Jupyter Notebook'],
   },
   {
     category: 'Languages',
-    skills: [
-      { name: 'Burmese', level: 100 },
-      { name: 'English', level: 80 },
-      { name: 'Japanese (JLPT N3)', level: 60 },
-      { name: 'Thai', level: 35 },
-    ],
+    skills: ['Burmese', 'English', 'Japanese (JLPT N3)', 'Thai'],
   },
 ]
 
 export default function Skills() {
   return (
     <section id="skills" className={styles.section}>
-      <div className={styles.header}>
-        <p className={styles.label}>Toolkit</p>
-        <h2 className={styles.title}>Skills</h2>
-      </div>
+      <AnimatedSection>
+        <div className={styles.header}>
+          <p className={styles.label}>Toolkit</p>
+          <h2 className={styles.title}>Skills</h2>
+        </div>
+      </AnimatedSection>
+
       <div className={styles.grid}>
-        {skillGroups.map((group) => (
-          <div key={group.category} className={styles.groupCard}>
+        {skillGroups.map((group, gi) => (
+          <AnimatedSection key={group.category} delay={gi * 0.06} className={styles.groupCard}>
             <p className={styles.groupLabel}>{group.category}</p>
             <div className={styles.skillList}>
               {group.skills.map((skill) => (
-                <span key={skill.name} className={styles.skillChip}>
-                  {skill.name}
+                <span key={skill} className={styles.skillChip}>
+                  {skill}
                 </span>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
         ))}
       </div>
     </section>
