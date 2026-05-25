@@ -28,7 +28,7 @@ const skillGroups: SkillGroup[] = [
   },
   {
     category: 'Languages',
-    skills: ['Burmese', 'English', 'Japanese (JLPT N3)', 'Thai'],
+    skills: ['Burmese', 'English', 'Japanese (JLPT N3)'],
   },
 ]
 
