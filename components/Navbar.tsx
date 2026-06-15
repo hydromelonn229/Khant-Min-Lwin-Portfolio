@@ -29,7 +29,7 @@ const MoonIcon = () => (
   </svg>
 )
 
-const sections = ['hero', 'education', 'projects', 'awards', 'skills']
+const sections = ['hero', 'projects', 'education', 'awards', 'skills']
 
 export default function Navbar() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
@@ -94,8 +94,8 @@ export default function Navbar() {
   const closeMobile = useCallback(() => setMobileOpen(false), [])
 
   const navLinks = [
-    { href: '#education', label: 'Education' },
     { href: '#projects', label: 'Projects' },
+    { href: '#education', label: 'Education' },
     { href: '#awards', label: 'Awards' },
     { href: '#skills', label: 'Skills' },
   ]

@@ -1,7 +1,5 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import AnimatedSection, { StaggerContainer, StaggerItem } from './AnimatedSection'
 import styles from './Projects.module.css'
@@ -58,17 +56,7 @@ const ScanIcon = () => (
   </svg>
 )
 
-const analyticProjects: Project[] = [
-  {
-    type: 'Marketing Strategy Analysis',
-    title: 'Cyclistic Trend Analysis',
-    description:
-      'Combined and analysed 12 months of bike-share data to identify behavioral differences between casual riders and annual members. Performed data cleaning, transformation, and feature engineering to surface weekday, hourly, and ride-duration trends, then translated the findings into targeted marketing insights.',
-    tags: ['Excel', 'Power Query'],
-    githubUrl: 'https://github.com/hydromelonn229/Cyclistic_CaseStudy',
-    image: '/cyclistic.png',
-    icon: <BarIcon />,
-  },
+const projectsData: Project[] = [
   {
     type: 'Retention Strategy',
     title: 'Bank Customer Churn Analysis',
@@ -91,12 +79,12 @@ const analyticProjects: Project[] = [
   },
   {
     type: 'Predictive Modelling',
-    title: 'Movie Success Optimisation',
+    title: 'Flight Delay Prediction & Analytics',
     description:
-      'Built machine learning models to predict movie revenue and ratings using 30,000+ records. Designed data cleaning and feature engineering pipelines, then developed Power BI dashboards to visualise trends and identify key success factors.',
-    tags: ['Python', 'Pandas', 'Power BI'],
-    googleColabUrl: 'https://colab.research.google.com/drive/1l2mVwSs285kB0A5ZCgbldIYzirVIePtC?usp=sharing',
-    image: '/IMDB.png',
+      'Built an end-to-end machine learning pipeline and Streamlit dashboard to predict monthly route delay risk using 98,000+ flight records. Engineered cyclical seasonality features and Bayesian-smoothed airport rankings, and deployed Logistic Regression and Random Forest models achieving up to 74% recall.',
+    tags: ['Python', 'Scikit-learn', 'Streamlit', 'Pandas'],
+    githubUrl: 'https://github.com/hydromelonn229/flight-delay-prediction',
+    image: '/flight_delay_dashboard.png',
     icon: <BarIcon />,
   },
   {
@@ -109,16 +97,13 @@ const analyticProjects: Project[] = [
     image: '/train_batch2.jpg',
     icon: <ScanIcon />,
   },
-]
-
-const developmentProjects: Project[] = [
   {
     type: 'Automation System',
     title: 'AUREX Exam Paper Automation System',
     description:
       'Built a privacy-preserving system to automate exam paper generation for large university courses. Reduced exam preparation time by 95% and created an end-to-end pipeline with Excel input, NLP-based duplicate detection, and automated Word document generation.',
     tags: ['Python', 'NLP', 'Scikit-learn', 'Flask'],
-    githubUrl: 'https://github.com/juliaizbroke/SeniorProject1',
+    githubUrl: 'https://github.com/hydromelonn229/aurex-exam-automation-tool',
     image: '/AUREX.png',
     icon: <GridIcon />,
   },
@@ -128,19 +113,9 @@ const developmentProjects: Project[] = [
     description:
       'DTG FieldLink is a dual-platform Field Service Management System that streamlines ISP maintenance operations by connecting dispatchers and field technicians through real-time ticket management, mobile workforce tools, and automated reporting.',
     tags: ['Web App', 'Ticketing', 'Platform'],
-    githubUrl: 'https://github.com/ZweLaPyae/DTG_FieldLink',
+    githubUrl: 'https://github.com/hydromelonn229/DTG_FieldLink',
     image: '/DTG FieldLink.png',
     icon: <LineIcon />,
-  },
-  {
-    type: 'Puzzle Game',
-    title: 'Keybound Depths',
-    description:
-      'A 2.5D puzzle solving game where players navigate levels by finding their way out. Two seperate levels written with C# and Unity. Features a proper menu system with a high score system as well as sound effects and background music.',
-    tags: ['Game Dev', 'Puzzle', 'Gameplay'],
-    githubUrl: 'https://github.com/hydromelonn229/GameDevPrj',
-    image: '/KeyBoundDepths.png',
-    icon: <PieIcon />,
   },
 ]
 
@@ -188,122 +163,19 @@ function ProjectCard({ project }: { project: Project }) {
   )
 }
 
-/* ── Carousel for analytics projects ── */
-function ProjectCarousel({ projects }: { projects: Project[] }) {
-  const [current, setCurrent] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const total = projects.length
-
-  const goTo = useCallback((index: number) => {
-    setCurrent(((index % total) + total) % total)
-  }, [total])
-
-  const next = useCallback(() => goTo(current + 1), [current, goTo])
-  const prev = useCallback(() => goTo(current - 1), [current, goTo])
-
-  // Auto-advance
-  useEffect(() => {
-    if (isPaused) return
-    timerRef.current = setInterval(() => {
-      setCurrent((c) => (c + 1) % total)
-    }, 5000)
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [isPaused, total])
-
-  // Keyboard nav
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prev()
-      if (e.key === 'ArrowRight') next()
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [next, prev])
-
-  return (
-    <div
-      className={styles.carousel}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div className={styles.carouselViewport}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            className={styles.carouselSlide}
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -60 }}
-            transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <ProjectCard project={projects[current]} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Navigation arrows */}
-      <button className={`${styles.carouselArrow} ${styles.arrowLeft}`} onClick={prev} aria-label="Previous project">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-      <button className={`${styles.carouselArrow} ${styles.arrowRight}`} onClick={next} aria-label="Next project">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-
-      {/* Dot indicators */}
-      <div className={styles.dots}>
-        {projects.map((_, i) => (
-          <button
-            key={i}
-            className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
-            onClick={() => goTo(i)}
-            aria-label={`Go to project ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 /* ── Main Projects section ── */
 export default function Projects() {
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const carouselInView = useInView(carouselRef, { once: true, margin: '-80px 0px' })
-
   return (
     <section id="projects" className={styles.section}>
-      {/* Analytics projects — carousel */}
       <AnimatedSection>
         <div className={styles.header}>
           <p className={styles.label}>Work</p>
-          <h2 className={styles.title}>Data Analytics and Science Projects</h2>
-        </div>
-      </AnimatedSection>
-
-      <motion.div
-        ref={carouselRef}
-        initial={{ opacity: 0, y: 30 }}
-        animate={carouselInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <ProjectCarousel projects={analyticProjects} />
-      </motion.div>
-
-      {/* Development projects — grid */}
-      <AnimatedSection delay={0.1}>
-        <div className={styles.header} style={{ marginTop: '4rem' }}>
-          <h2 className={styles.title}>Development Projects</h2>
+          <h2 className={styles.title}>Projects</h2>
         </div>
       </AnimatedSection>
 
       <StaggerContainer className={styles.grid} staggerDelay={0.1}>
-        {developmentProjects.map((project, i) => (
+        {projectsData.map((project, i) => (
           <StaggerItem key={project.title + i}>
             <ProjectCard project={project} />
           </StaggerItem>

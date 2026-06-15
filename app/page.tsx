@@ -13,9 +13,9 @@ export default function Home() {
       <main>
         <Hero />
         <hr style={{ border: 'none', borderTop: '0.5px solid var(--rule)', margin: '0 3rem' }} />
-        <Education />
-        <hr style={{ border: 'none', borderTop: '0.5px solid var(--rule)', margin: '0 3rem' }} />
         <Projects />
+        <hr style={{ border: 'none', borderTop: '0.5px solid var(--rule)', margin: '0 3rem' }} />
+        <Education />
         <hr style={{ border: 'none', borderTop: '0.5px solid var(--rule)', margin: '0 3rem' }} />
         <Awards />
         <hr style={{ border: 'none', borderTop: '0.5px solid var(--rule)', margin: '0 3rem' }} />
