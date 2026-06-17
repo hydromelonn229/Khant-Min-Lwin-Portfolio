@@ -31,7 +31,11 @@ const MoonIcon = () => (
 
 const sections = ['hero', 'projects', 'education', 'awards', 'skills']
 
-export default function Navbar() {
+interface NavbarProps {
+  onContactClick: () => void
+}
+
+export default function Navbar({ onContactClick }: NavbarProps) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
@@ -118,9 +122,9 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="mailto:khantminlwin1@gmail.com" className={styles.contactBtn}>
+            <button onClick={onContactClick} className={styles.contactBtn}>
               Contact
-            </a>
+            </button>
           </li>
           <li>
             <button
@@ -181,9 +185,15 @@ export default function Navbar() {
             </li>
           ))}
           <li style={{ transitionDelay: mobileOpen ? `${navLinks.length * 50 + 100}ms` : '0ms' }}>
-            <a href="mailto:khantminlwin1@gmail.com" className={styles.drawerContact} onClick={closeMobile}>
+            <button
+              onClick={() => {
+                closeMobile()
+                onContactClick()
+              }}
+              className={styles.drawerContact}
+            >
               Contact →
-            </a>
+            </button>
           </li>
         </ul>
       </div>

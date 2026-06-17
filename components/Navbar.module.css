@@ -76,6 +76,9 @@
   color: var(--paper) !important;
   border-radius: 4px;
   transition: background 0.2s !important;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
 }
 
 .contactBtn:hover {
@@ -242,6 +245,9 @@
   text-decoration: none;
   letter-spacing: 0.03em;
   transition: background 0.2s;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
 }
 
 .drawerContact:hover {

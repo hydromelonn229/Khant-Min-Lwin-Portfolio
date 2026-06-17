@@ -3,7 +3,11 @@
 import { useEffect, useState } from 'react'
 import styles from './Footer.module.css'
 
-export default function Footer() {
+interface FooterProps {
+  onContactClick: () => void
+}
+
+export default function Footer({ onContactClick }: FooterProps) {
   const [showTop, setShowTop] = useState(false)
 
   useEffect(() => {
@@ -37,13 +41,13 @@ export default function Footer() {
             </svg>
             <span>GitHub</span>
           </a>
-          <a href="mailto:khantminlwin1@gmail.com" aria-label="Email" className={styles.socialLink}>
+          <button onClick={onContactClick} aria-label="Email" className={styles.socialLink}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
               <path d="M22 7L12 13L2 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <span>Email</span>
-          </a>
+          </button>
         </div>
 
         <button

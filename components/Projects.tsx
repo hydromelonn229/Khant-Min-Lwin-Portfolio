@@ -68,6 +68,16 @@ const projectsData: Project[] = [
     icon: <PieIcon />,
   },
   {
+    type: 'Automation System',
+    title: 'AUREX Exam Paper Automation System',
+    description:
+      'Built a privacy-preserving system to automate exam paper generation for large university courses. Reduced exam preparation time by 95% and created an end-to-end pipeline with Excel input, NLP-based duplicate detection, and automated Word document generation.',
+    tags: ['Python', 'NLP', 'Scikit-learn', 'Flask'],
+    githubUrl: 'https://github.com/hydromelonn229/aurex-exam-automation-tool',
+    image: '/AUREX.png',
+    icon: <GridIcon />,
+  },
+  {
     type: 'Workforce Analytics',
     title: 'Understanding Attrition Drivers',
     description:
@@ -96,16 +106,6 @@ const projectsData: Project[] = [
     githubUrl: 'https://github.com/hydromelonn229/Receipt-Field-Detection',
     image: '/train_batch2.jpg',
     icon: <ScanIcon />,
-  },
-  {
-    type: 'Automation System',
-    title: 'AUREX Exam Paper Automation System',
-    description:
-      'Built a privacy-preserving system to automate exam paper generation for large university courses. Reduced exam preparation time by 95% and created an end-to-end pipeline with Excel input, NLP-based duplicate detection, and automated Word document generation.',
-    tags: ['Python', 'NLP', 'Scikit-learn', 'Flask'],
-    githubUrl: 'https://github.com/hydromelonn229/aurex-exam-automation-tool',
-    image: '/AUREX.png',
-    icon: <GridIcon />,
   },
   {
     type: 'Ticket Management Platform',
